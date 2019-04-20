@@ -7,8 +7,8 @@ from pygame.locals import QUIT, KEYDOWN, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_SPACE,
 class yilan():
 
     def __init__(self):
-        self.yX = [290, 290, 290, 290, 290]
-        self.yY = [290, 270, 250, 230, 210]
+        self.yX = [289, 289, 289, 289, 289]
+        self.yY = [289, 269, 249, 229, 209]
         # yılan başlangıç yönü
         self.yonY = 0
         """
@@ -20,7 +20,7 @@ class yilan():
         """
         self.puan = 0
         # elmanın rastgele konumu
-        self.yemPozisyonu = (random.randint(1, 590), random.randint(1, 590))
+        self.yemPozisyonu = (random.randint(3, 588), random.randint(3, 588))
         pygame.init()
         # ekran boyutu
         self.ekran = pygame.display.set_mode((600, 600))
@@ -206,7 +206,7 @@ class yilan():
                 # yemin rengini rastgele değiştirme
                 self.yemSekli.fill(
                     (random.randint(0, 220), random.randint(0, 225), random.randint(0, 230)))
-                self.yemPozisyonu = (random.randint(1, 590), random.randint(1, 590))
+                self.yemPozisyonu = (random.randint(3, 588), random.randint(3, 588))
 
             if self.yX[0] < 0 or self.yX[0] > 580 or self.yY[0] < 0 or self.yY[0] > 580:  # duvara çarpması
                 self.yandiEkrani(self.ekran, self.puan)
