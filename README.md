@@ -27,14 +27,14 @@ sudo apt install python3-pip
 ```sh
 sudo pacman -S python3-pip
 ```
-##  Converting to executable game file
+##  Converting to executable game file:
 ```sh
 pip install pyinstaller
 ```
 ```sh
 pyinstaller --onefile --windowed  snakePygame.py
 ```
-or icon file adding(app.ico: icon file name):
+If you want to adding a icon file(app.ico: icon file name):
 ```sh
 pyinstaller --onefile --windowed --icon=app.ico snakePygame.py
 ```
