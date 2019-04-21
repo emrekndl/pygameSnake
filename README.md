@@ -29,7 +29,7 @@ sudo pacman -S python3-pip
 ```
 ##  Converting to executable game file:
 ```sh
-pip install pyinstaller
+pip3 install pyinstaller
 ```
 ```sh
 pyinstaller --onefile --windowed  snakePygame.py
