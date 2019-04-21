@@ -151,10 +151,20 @@ class yilan():
                             # pygame.display.update()
                             pass
 
+    def yemPozisyonuOlustur(self):
+        self.yemPozisyonu = (random.randint(3, 588), random.randint(3, 588))
+        # yılanın içinde yemin oluşmaması için
+        for i in self.yX:
+            if (self.yemPozisyonu[0] == i):
+                for j in self.yy:
+                    if (self.yemPozisyonu[1] == j):
+                        self.yemPozisyonuOlustur()
+
     def game(self, hiz=11):
 
         kontrol = False
         while True:
+            self.frm = False
             # FPS 10 HIZ
             if(self.puan % 10 == 0 and kontrol):
                 kontrol = False
@@ -167,15 +177,22 @@ class yilan():
                     pygame.quit()
                     sys.exit(0)
                 elif e.type == KEYDOWN:
-                    if e.key == K_UP and self.yonY != 0:  # tersi yöne gidemez!
-                        self.yonY = 2
-                    elif e.key == K_DOWN and self.yonY != 2:
-                        self.yonY = 0
-                    elif e.key == K_LEFT and self.yonY != 1:
-                        self.yonY = 3
-                    elif e.key == K_RIGHT and self.yonY != 3:
-                        self.yonY = 1
-                    elif e.key == K_p:
+                    # tek seferde bi yön tuşunun çalışması için
+                    if ((e.key == K_UP or e.key == K_DOWN or e.key == K_LEFT or e.key == K_RIGHT) and self.frm is False):
+
+                        if e.key == K_UP and self.yonY != 0:  # tersi yöne gidemez!
+                            self.yonY = 2
+                            self.frm = True
+                        elif e.key == K_DOWN and self.yonY != 2:
+                            self.yonY = 0
+                            self.frm = True
+                        elif e.key == K_LEFT and self.yonY != 1:
+                            self.yonY = 3
+                            self.frm = True
+                        elif e.key == K_RIGHT and self.yonY != 3:
+                            self.yonY = 1
+                            self.frm = True
+                    if e.key == K_p:
                         if(self.duraklat is False):
                             self.duraklat = True
                         else:
@@ -206,7 +223,8 @@ class yilan():
                 # yemin rengini rastgele değiştirme
                 self.yemSekli.fill(
                     (random.randint(0, 220), random.randint(0, 225), random.randint(0, 230)))
-                self.yemPozisyonu = (random.randint(3, 588), random.randint(3, 588))
+
+                self.yemPozisyonuOlustur()
 
             if self.yX[0] < 0 or self.yX[0] > 580 or self.yY[0] < 0 or self.yY[0] > 580:  # duvara çarpması
                 self.yandiEkrani(self.ekran, self.puan)
