@@ -145,20 +145,29 @@ class yilan():
                         sys.exit(0)
                     else:
                         while (d is not True):
-                            # pygame.time.wait(10000)
+                            print("saniye başladı")
+                            pygame.time.wait(10000)
+                            print("saniye bitti")
                             # metin = self.yaziTipi.render("||", True, (0, 0, 0))
                             # ekran.blit(metin, (10, 400))
                             # pygame.display.update()
-                            pass
+                            # pass
 
     def yemPozisyonuOlustur(self):
         self.yemPozisyonu = (random.randint(3, 588), random.randint(3, 588))
         # yılanın içinde yemin oluşmaması için
         for i in self.yX:
-            if (self.yemPozisyonu[0] == i):
-                for j in self.yy:
-                    if (self.yemPozisyonu[1] == j):
-                        self.yemPozisyonuOlustur()
+            for j in self.yY:
+                if self.yemYilanKontrol(i, self.yemPozisyonu[0], j, self.yemPozisyonu[1], 20, 10, 20, 10):
+                    print("içinde oluştu \nXY: ", self.yX, "\nYY: ",
+                          self.yY, "\nYem: ", self.yemPozisyonu)
+                    self.yemPozisyonuOlustur()
+
+        # for i in self.yX:
+        #    if (self.yemPozisyonu[0] == i):
+        #        for j in self.yy:
+        #            if (self.yemPozisyonu[1] == j):
+        #                self.yemPozisyonuOlustur()
 
     def game(self, hiz=11):
 
@@ -217,14 +226,13 @@ class yilan():
 
             # elmayı yemesi
             if self.yemYilanKontrol(self.yX[0], self.yemPozisyonu[0], self.yY[0], self.yemPozisyonu[1], 20, 10, 20, 10):
+                # yemin rengini rastgele değiştirme
+                self.yemPozisyonuOlustur()
+                self.yemSekli.fill(
+                    (random.randint(0, 220), random.randint(0, 225), random.randint(0, 230)))
                 self.puan += 1
                 self.yX.append(700)  # yeni eklene kare
                 self.yY.append(700)
-                # yemin rengini rastgele değiştirme
-                self.yemSekli.fill(
-                    (random.randint(0, 220), random.randint(0, 225), random.randint(0, 230)))
-
-                self.yemPozisyonuOlustur()
 
             if self.yX[0] < 0 or self.yX[0] > 580 or self.yY[0] < 0 or self.yY[0] > 580:  # duvara çarpması
                 self.yandiEkrani(self.ekran, self.puan)
